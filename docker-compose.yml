@@ -1,0 +1,62 @@
+version: '3'
+
+volumes:
+  pg_data:
+  static:
+  media:
+  redoc:
+
+services:
+  db:
+    image: postgres:13.0-alpine
+    env_file:
+      - ./.env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - foodgram_network
+
+  backend:
+    image: seregaovchinnikov/foodgram_backend:latest
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - static:/backend_static
+      - media:/app/media
+    depends_on:
+      - db
+    networks:
+      - foodgram_network
+
+  frontend:
+    image: seregaovchinnikov/foodgram_frontend:latest
+    env_file:
+      - ./.env
+    command: cp -r /app/build/. /frontend_static/
+    volumes:
+      - static:/static
+    networks:
+      - foodgram_network
+
+  nginx:
+    image: seregaovchinnikov/foodgram_nginx:latest
+    env_file:
+      - ./.env
+    ports:
+      - "7000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/build:/usr/share/nginx/html/
+      - static:/static
+      - ../docs/:/usr/share/nginx/html/api/docs/
+      - media:/media/
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - foodgram_network
+
+networks:
+  foodgram_network:
+    driver: bridge
