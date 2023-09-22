@@ -12,9 +12,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='token')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '158.160.73.37', 'foodgramov.ddns.net']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '158.160.73.37', 'ovchinnikov777.ddns.net']
 
-CSRF_TRUSTED_ORIGINS = ['https://foodgramov.ddns.net']
+CSRF_TRUSTED_ORIGINS = ['https://ovchinnikov777.ddns.net']
 
 # Application definition
 
