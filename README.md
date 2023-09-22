@@ -240,7 +240,7 @@ TELEGRAM_TOKEN=<токен вашего бота>
    GET /api/v1/recipes/download_shopping_cart/
 ```
 
-Проект доступен по адресу: <http://Foodgramov.ddns.net/>
+Проект доступен по адресу: <http://Ovchinnikov777.ddns.net/>
 
 Доступ в админку:
 
